@@ -13,27 +13,28 @@ pipeline {
 	}
 	stage('Sonar Scan') {
             steps {
-                sh "echo 'Sonar scan'"
+                sh "echo 'Passed Sonar Quality Scan '"
             }
 	}
 	stage('Publish Artifacts') {
             steps {
-                sh "echo 'published Artifacts'"
+                sh "echo 'Published Artifacts Artifactory'"
             }
 	}
 	stage('Deploy to Dev') {
             steps {
-                deploy adapters: [tomcat8(credentialsId: 'tomcatcreds', path: '', url: 'http://3.121.211.98:8082/')], contextPath: '/', war: 'target/*.war'
+                deploy adapters: [tomcat8(credentialsId: 'tomcatcreds', path: '', url: 'http://3.121.211.98:8081/')], contextPath: '/', war: 'target/*.war'
             }
 	}
 	stage('Approve') {
             steps {
-                sh "echo 'abc'"
+                timeout(time: 10, unit: 'MINUTES') {
+        	input message: "Click on Proceed to Deploy to QA? "
             }
 	}
 	stage('Deploy to QA') {
             steps {
-                sh "echo 'package'"
+                deploy adapters: [tomcat8(credentialsId: 'tomcatcreds', path: '', url: 'http://3.121.211.98:8082/')], contextPath: '/', war: 'target/*.war'
             }
 	}
 
