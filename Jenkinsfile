@@ -29,7 +29,7 @@ pipeline {
 	stage('Approve') {
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
-        	input message: "Click on Proceed to Deploy to QA? "
+			input message: "Click on Proceed to Deploy to QA? "}
             }
 	}
 	stage('Deploy to QA') {
