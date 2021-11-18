@@ -18,7 +18,7 @@ pipeline {
 	stage('Sonar Scan') {
             steps {
                 sh "echo 'Passed Sonar Quality Scan '"
-		    sh "echo ${param.name}"
+		    sh "echo ${params.name}"
             }
 	}
 	stage('Publish Artifacts') {
