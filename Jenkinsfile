@@ -5,9 +5,6 @@ pipeline {
     tools {
         maven "maven"
         }
-    parameters {
-  string defaultValue: 'anand', description: 'Enter a name', name: 'name', trim: false
-}
 
     stages {
 	stage('build') {
@@ -18,7 +15,6 @@ pipeline {
 	stage('Sonar Scan') {
             steps {
                 sh "echo 'Passed Sonar Quality Scan '"
-		    sh "echo ${params.name}"
             }
 	}
 	stage('Publish Artifacts') {
